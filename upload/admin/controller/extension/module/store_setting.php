@@ -14,6 +14,7 @@ class ControllerExtensionModuleStoreSetting extends Controller {
         $this->load->model('setting/setting');
         $this->document->addScript('view/javascript/colorpicker/colorpicker.min.js');
         $this->document->addLink('view/javascript/colorpicker/colorpicker.min.css', 'stylesheet');
+        
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             $action = isset($this->request->post["action"]) ? $this->request->post["action"] : "";
             
@@ -114,7 +115,6 @@ class ControllerExtensionModuleStoreSetting extends Controller {
         $this->load->model('design/layout');
 
 		$data['layouts'] = $this->model_design_layout->getLayouts();
-
 
         $this->load->model('localisation/location');
 
@@ -229,7 +229,7 @@ class ControllerExtensionModuleStoreSetting extends Controller {
             $data['is_developer'] = 1;
         }
 
-        // images
+       
         foreach ($data['languages'] as $language) {
 
            if (isset($this->request->post['config_logo_admin']['language_' . $language['language_id']]) 
@@ -266,9 +266,23 @@ class ControllerExtensionModuleStoreSetting extends Controller {
                     $data['icon']['language_' . $language['language_id']] = $this->model_tool_image->resize('no_image.png', 100, 100);
                 }
 
+                if(isset($data['config_social']['language_' . $language['language_id']]) ) {
+                    foreach ($data['config_social']['language_' . $language['language_id']] as $key => $value) {
+                        $data['config_social']['language_' . $language['language_id']][$key]['image_url'] = $this->model_tool_image->resize($value['image'], 100, 100);
+                    }
+                }
+
+                if(isset($data['config_application']['language_' . $language['language_id']]) ) {
+                    foreach ($data['config_application']['language_' . $language['language_id']] as $key => $value) {
+                        $data['config_application']['language_' . $language['language_id']][$key]['image_url'] = $this->model_tool_image->resize($value['image'], 100, 100);
+                    }
+                }
+
         }
-        
-        
+
+
+
+      
 
 
 		$data['save_section'] = $this->load->controller('extension/component/save_section', [
@@ -403,10 +417,15 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
-
         foreach ($this->request->post['config_social'] as $key => $value) {
             if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
                 $this->error['social_name'][$key] = $this->language->get('error_social_name');
+            }
+        }
+
+        foreach ($this->request->post['config_application'] as $key => $value) {
+            if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+                $this->error['application_name'][$key] = $this->language->get('error_application_name');
             }
         }
         
