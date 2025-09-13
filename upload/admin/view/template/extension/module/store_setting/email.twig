@@ -62,8 +62,8 @@
                   <div class="col-sm-10">
                     <input type="text" name="config_mail_smtp_timeout" value="{{ config_mail_smtp_timeout }}" placeholder="{{ entry_mail_smtp_timeout }}" id="input-mail-smtp-timeout" class="form-control" />
 
-{% if error_mail_smtp_timeout %}
-<div class="text-danger">{{ error_mail_smtp_timeout }}</div>
+{% if error.mail_smtp_timeout %}
+<div class="text-danger">{{ error.mail_smtp_timeout }}</div>
 {% endif %}
 
                   </div>

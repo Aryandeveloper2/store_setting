@@ -20,8 +20,8 @@
 <input type="hidden" name="config_social[{{social_row}}][image]" value="{{ social.image }}" id="input-image{{ social_row }}"/>
 </td>
 <td class="text-right "><input type="text" name="config_social[{{social_row}}][name]" value="{{ social.name }}"  class="form-control" />
-{% if error_social_name %}
-<p class="text-danger">{{ error_social_name[social_row] }}</p>
+{% if error.social_name %}
+<p class="text-danger">{{ error.social_name[social_row] }}</p>
 {% endif %}
 </td>
 <td class="text-right "><input type="text" name="config_social[{{social_row}}][title]" value="{{ social.title }}"  class="form-control" /></td>
@@ -39,67 +39,8 @@
 </table>
 </fieldset>
 
+  
   <script type="text/javascript"><!--
-$('select[name=\'config_theme\']').on('change', function() {
-	$.ajax({
-		url: 'index.php?route=setting/setting/theme&user_token={{ user_token }}&theme=' + this.value,
-		dataType: 'html',
-		beforeSend: function() {
-			$('select[name=\'config_theme\']').prop('disabled', true);
-		},
-		complete: function() {
-			$('select[name=\'config_theme\']').prop('disabled', false);
-		},
-		success: function(html) {
-			$('#theme').attr('src', html);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
-
-$('select[name=\'config_theme\']').trigger('change');
-//--></script> 
-  <script type="text/javascript"><!--
-$('select[name=\'config_country_id\']').on('change', function() {
-	$.ajax({
-		url: 'index.php?route=localisation/country/country&user_token={{ user_token }}&country_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'config_country_id\']').prop('disabled', true);
-		},
-		complete: function() {
-			$('select[name=\'config_country_id\']').prop('disabled', false);
-		},
-		success: function(json) {
-			html = '<option value="">{{ text_select }}</option>';
-
-			if (json['zone'] && json['zone'] != '') {
-				for (i = 0; i < json['zone'].length; i++) {
-          			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-
-					if (json['zone'][i]['zone_id'] == '{{ config_zone_id }}') {
-            			html += ' selected="selected"';
-					}
-
-					html += '>' + json['zone'][i]['name'] + '</option>';
-				}
-			} else {
-				html += '<option value="0" selected="selected">{{ text_none }}</option>';
-			}
-
-			$('select[name=\'config_zone_id\']').html(html);
-			
-			$('#button-save').prop('disabled', false);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
-
-$('select[name=\'config_country_id\']').trigger('change');
 
 //================* social-tab scripts Social Media Tab data - added ashkanmh *================
 var social_row = {{ social_row }};

@@ -12,6 +12,29 @@ $_['entry_adaptive_status']          = 'وضعیت سیستم adaptive';
 $_['entry_stock_status']     = 'وضعیت فراتر از موجودی انبار';
 
 
+$_['entry_whatsapp_position']      = 'موقعیت دکمه';
+$_['entry_whatsapp_number']        = 'شماره';
+$_['entry_whatsapp_status']        = 'وضعیت';
+$_['entry_whatsapp_title']         = 'عنوان روی دکمه';
+$_['entry_whatsapp_text']          = 'متن پیش نویس';
+$_['entry_whatsapp_pagesoff']      = 'عدم نمایش در هنگام ورود مشتری';
+$_['entry_whatsapp_color']         = 'رنگ';
+
+
+$_['text_whatsapp_right']          = 'راست';
+$_['text_whatsapp_left']           = 'چپ';
+$_['text_whatsapp_title']          = 'Ex: Contact us';
+$_['text_whatsapp_status_on']      = 'فعال';
+$_['text_whatsapp_status_off']     = 'غیر فعال';
+$_['text_whatsapp_number']         = 'شماره';
+$_['text_whatsapp_text']           = 'Ex: Hi, I\'m contacting you through the website';
+$_['text_whatsapp_pagesoff_on']    = 'فعال';
+$_['text_whatsapp_pagesoff_off']   = 'غیر فعال';
+$_['text_whatsapp_color']   	   = 'RGB';
+
+
+
+
 //================* Setting Additional information - Added AryanDeveloper
 $_['entry_company_name']          = 'نام شرکت';
 $_['entry_footer_description']    = 'توضیحات فوتر';

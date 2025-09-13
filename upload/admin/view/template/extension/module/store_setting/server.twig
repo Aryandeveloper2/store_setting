@@ -130,8 +130,8 @@
     <label class="col-sm-2 control-label" for="input-encryption"><span data-toggle="tooltip" title="{{ help_encryption }}">{{ entry_encryption }}</span></label>
     <div class="col-sm-10">
     <textarea name="config_encryption" rows="5" placeholder="{{ entry_encryption }}" id="input-encryption" class="form-control">{{ config_encryption }}</textarea>
-    {% if error_encryption %}
-    <div class="text-danger">{{ error_encryption }}</div>
+    {% if error.encryption %}
+    <div class="text-danger">{{ error.encryption }}</div>
     {% endif %} </div>
 </div>
 

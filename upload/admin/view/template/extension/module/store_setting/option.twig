@@ -5,16 +5,16 @@
 <label class="col-sm-2 control-label" for="input_ovt_width"><span data-toggle="tooltip" title="Set thumbnail width for<br>sale/order/view order.">Set thumbnail width</span></label>
 <div class="col-sm-10">
 <input type="text" name="config_input_ovt_width" value="{{ config_input_ovt_width }}" placeholder="Width" id="input_ovt_width" class="form-control" />
-{% if error_config_input_ovt_width %}
-<div class="text-danger">{{ error_config_input_ovt_width }}</div>
+{% if error.config_input_ovt_width %}
+<div class="text-danger">{{ error.config_input_ovt_width }}</div>
 {% endif %} </div>
 </div>
 <div class="form-group required">
 <label class="col-sm-2 control-label" for="input_ovt_height"><span data-toggle="tooltip" title="Set thumbnail height for<br>sale/order/view order.">Set thumbnail height</span></label>
 <div class="col-sm-10">
 <input type="text" name="config_input_ovt_height" value="{{ config_input_ovt_height }}" placeholder="Height" id="input_ovt_height" class="form-control" />
-{% if error_config_input_ovt_height %}
-<div class="text-danger">{{ error_config_input_ovt_height }}</div>
+{% if error.config_input_ovt_height %}
+<div class="text-danger">{{ error.config_input_ovt_height }}</div>
 {% endif %} </div>
 </div>
 </fieldset>
@@ -44,8 +44,8 @@
                   <label class="col-sm-2 control-label" for="input-admin-limit"><span data-toggle="tooltip" title="{{ help_limit_admin }}">{{ entry_limit_admin }}</span></label>
                   <div class="col-sm-10">
                     <input type="text" name="config_limit_admin" value="{{ config_limit_admin }}" placeholder="{{ entry_limit_admin }}" id="input-admin-limit" class="form-control" />
-                    {% if error_limit_admin %}
-                    <div class="text-danger">{{ error_limit_admin }}</div>
+                    {% if error.limit_admin %}
+                    <div class="text-danger">{{ error.limit_admin }}</div>
                     {% endif %} </div>
                 </div>
               </fieldset>
@@ -96,16 +96,16 @@
                   <label class="col-sm-2 control-label" for="input-voucher-min"><span data-toggle="tooltip" title="{{ help_voucher_min }}">{{ entry_voucher_min }}</span></label>
                   <div class="col-sm-10">
                     <input type="text" name="config_voucher_min" value="{{ config_voucher_min }}" placeholder="{{ entry_voucher_min }}" id="input-voucher-min" class="form-control" />
-                    {% if error_voucher_min %}
-                    <div class="text-danger">{{ error_voucher_min }}</div>
+                    {% if error.voucher_min %}
+                    <div class="text-danger">{{ error.voucher_min }}</div>
                     {% endif %} </div>
                 </div>
                 <div class="form-group required">
                   <label class="col-sm-2 control-label" for="input-voucher-max"><span data-toggle="tooltip" title="{{ help_voucher_max }}">{{ entry_voucher_max }}</span></label>
                   <div class="col-sm-10">
                     <input type="text" name="config_voucher_max" value="{{ config_voucher_max }}" placeholder="{{ entry_voucher_max }}" id="input-voucher-max" class="form-control" />
-                    {% if error_voucher_max %}
-                    <div class="text-danger">{{ error_voucher_max }}</div>
+                    {% if error.voucher_max %}
+                    <div class="text-danger">{{ error.voucher_max }}</div>
                     {% endif %} </div>
                 </div>
               </fieldset>
@@ -279,8 +279,8 @@
                         {% endif %} </label>
                     </div>
                     {% endfor %}
-                    {% if error_customer_group_display %}
-                    <div class="text-danger">{{ error_customer_group_display }}</div>
+                    {% if error.customer_group_display %}
+                    <div class="text-danger">{{ error.customer_group_display }}</div>
                     {% endif %} </div>
                 </div>
                 <div class="form-group">
@@ -306,8 +306,8 @@
                   <label class="col-sm-2 control-label" for="input-login-attempts"><span data-toggle="tooltip" title="{{ help_login_attempts }}">{{ entry_login_attempts }}</span></label>
                   <div class="col-sm-10">
                     <input type="text" name="config_login_attempts" value="{{ config_login_attempts }}" placeholder="{{ entry_login_attempts }}" id="input-login-attempts" class="form-control" />
-                    {% if error_login_attempts %}
-                    <div class="text-danger">{{ error_login_attempts }}</div>
+                    {% if error.login_attempts %}
+                    <div class="text-danger">{{ error.login_attempts }}</div>
                     {% endif %} </div>
                 </div>
                 <div class="form-group">
@@ -433,8 +433,8 @@
                           {% endif %} </label>
                       </div>
                       {% endfor %} </div>
-                    {% if error_processing_status %}
-                    <div class="text-danger">{{ error_processing_status }}</div>
+                    {% if error.processing_status %}
+                    <div class="text-danger">{{ error.processing_status }}</div>
                     {% endif %} </div>
                 </div>
                 <div class="form-group">
@@ -451,8 +451,8 @@
                           {% endif %} </label>
                       </div>
                       {% endfor %} </div>
-                    {% if error_complete_status %}
-                    <div class="text-danger">{{ error_complete_status }}</div>
+                    {% if error.complete_status %}
+                    <div class="text-danger">{{ error.complete_status }}</div>
                     {% endif %} </div>
                 </div>
                 <div class="form-group">
