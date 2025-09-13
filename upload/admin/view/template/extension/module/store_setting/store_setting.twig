@@ -1,0 +1,52 @@
+{% extends  "extension/component/layouts/form_layout.twig" %}
+
+{% block content %}
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+            {{ save_section.input }}
+
+            <div class="tab-pane">
+
+                <ul class="nav nav-tabs" id="moduletab">
+                  <li class="active"><a href="#store_info" data-toggle="tab">اطلاعات فروشگاه</a></li>
+                  <li><a href="#image" data-toggle="tab">تصویر</a></li>
+                  <li><a href="#template" data-toggle="tab">قالب</a></li>
+                  <li><a href="#local" data-toggle="tab">محلی</a></li>
+                  <li><a href="#option" data-toggle="tab">گزینه‌ها</a></li>
+                  <li><a href="#email" data-toggle="tab">ایمیل</a></li>
+                  <li><a href="#whatsapp" data-toggle="tab">واتساپ</a></li>
+                  <li><a href="#server" data-toggle="tab">سرور</a></li>
+                  <li><a href="#social" data-toggle="tab">شبکه‌های اجتماعی</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="store_info">
+                        {% include "extension/module/store_setting/store_info.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="image">
+                        {% include "extension/module/store_setting/image.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="template">
+                        {% include "extension/module/store_setting/template.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="local">
+                        {% include "extension/module/store_setting/local.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="option">
+                        {% include "extension/module/store_setting/option.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="email">
+                        {% include "extension/module/store_setting/email.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="whatsapp">
+                        {% include "extension/module/store_setting/whatsapp.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="server">
+                        {% include "extension/module/store_setting/server.twig"  %}
+                    </div>
+                    <div class="tab-pane" id="social">
+                        {% include "extension/module/store_setting/social.twig"  %}
+                    </div>
+                </div>
+            </div>
+        </form>
+{% endblock %}

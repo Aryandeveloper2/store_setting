@@ -1,0 +1,185 @@
+<ul class="nav nav-tabs" id="faq-language">
+    {% for language in languages %}
+        <li class="{{ loop.first ? 'active' : '' }}"><a href="#store-info-tab-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+    {% endfor %}
+</ul>
+<div class="tab-content">
+    {% for language in languages %}
+
+        <div class="tab-pane {{ loop.first ? 'active' : '' }}" id="store-info-tab-language{{ language.language_id }}">
+             
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_name[{{'language_'~language.language_id}}]" value="{{ config_name['language_'~language.language_id] }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                    {% if error_name['language_'~language.language_id] %}                                       
+                        <div class="text-danger">{{ error_name['language_'~language.language_id] }}</div>
+                    {% endif %} 
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-owner">{{ entry_owner }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_owner[{{'language_'~language.language_id}}]" value="{{ config_owner['language_'~language.language_id] }}" placeholder="{{ entry_owner }}" id="input-owner" class="form-control" />
+                    {% if error_owner['language_'~language.language_id] %}
+                        <div class="text-danger">{{ error_owner['language_'~language.language_id] }}</div>
+                    {% endif %} 
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-company_name">{{ entry_company_name }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_company_name" value="{{ config_company_name }}" placeholder="{{ entry_company_name }}" id="input-company_name" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_meta_title }}</label>
+                <div class="col-sm-10">
+                <input type="text" name="config_meta_title" value="{{ config_meta_title }}" placeholder="{{ entry_meta_title }}" id="input-meta-title" class="form-control" />
+                {% if error_meta_title %}
+                <div class="text-danger">{{ error_meta_title }}</div>
+                {% endif %} </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-meta-description">{{ entry_meta_description }}</label>
+                <div class="col-sm-10">
+                <textarea name="config_meta_description" rows="5" placeholder="{{ entry_meta_description }}" id="input-meta-description" class="form-control">{{ config_meta_description }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-meta-keyword">{{ entry_meta_keyword }}</label>
+                <div class="col-sm-10">
+                <textarea name="config_meta_keyword" rows="5" placeholder="{{ entry_meta_keyword }}" id="input-meta-keyword" class="form-control">{{ config_meta_keyword }}</textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-alternate_site_name">{{ entry_alternate_site_name }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_alternate_site_name" value="{{ config_alternate_site_name }}" placeholder="{{ entry_alternate_site_name }}" id="input-alternate_site_name" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-company_postal_code">{{ entry_company_postal_code }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_company_postal_code" value="{{ config_company_postal_code }}" placeholder="{{ entry_company_postal_code }}" id="input-company_postal_code" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-company_geo_link">{{ entry_company_geo_link }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_company_geo_link" value="{{ config_company_geo_link }}" placeholder="{{ entry_company_geo_link }}" id="input-company_geo_link" class="form-control" />
+                </div>
+            </div>
+         
+
+            <div class="form-group required">
+
+                <label class="col-sm-2 control-label" for="input-address">{{ entry_address }}</label>
+                <div class="col-sm-10">
+                    <textarea name="config_address[{{'language_'~language.language_id}}]" placeholder="{{ entry_address }}" rows="5" id="input-address{{language.language_id}}" class="form-control">{{ config_address['language_'~language.language_id] }}</textarea>
+                    {% if error_address['language_'~language.language_id] %}                                       
+                        <div class="text-danger">{{ error_address['language_'~language.language_id] }}</div>
+                    {% endif %} 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-geocode"><span data-toggle="tooltip" data-container="#tab-general" title="{{ help_geocode }}">{{ entry_geocode }}</span></label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_geocode[{{'language_'~language.language_id}}]" value="{{ config_geocode['language_'~language.language_id] }}" placeholder="{{ entry_geocode }}" id="input-geocode" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+                <div class="col-sm-10">
+                
+                    <input type="text" name="config_email[{{'language_'~language.language_id}}]" value="{{ config_email['language_'~language.language_id] }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+
+                
+                    {% if error_email['language_'~language.language_id] %}                                       
+                        <div class="text-danger">{{ error_email['language_'~language.language_id] }}</div>
+
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_telephone[{{'language_'~language.language_id}}]" value="{{ config_telephone['language_'~language.language_id] }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control" />
+                
+                    {% if error_telephone['language_'~language.language_id] %}
+                        <div class="text-danger">{{ error_telephone['language_'~language.language_id] }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-fax">{{ entry_fax }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_fax[{{'language_'~language.language_id}}]" value="{{ config_fax['language_'~language.language_id] }}" placeholder="{{ entry_fax }}" id="input-fax" class="form-control" />
+                </div>
+            </div>  
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-image">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                    <a href="" id="thumb-image{{language.language_id}}" data-toggle="image" class="img-thumbnail"><img src="{{ thumb['language_'~language.language_id] }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                    <input type="hidden" name="config_image[{{'language_'~language.language_id}}]" value="{{ config_image['language_'~language.language_id] }}" id="input-image{{language.language_id}}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-open"><span data-toggle="tooltip" data-container="#tab-general" title="{{ help_open }}">{{ entry_open }}</span></label>
+                <div class="col-sm-10">
+                    <textarea name="config_open[{{'language_'~language.language_id}}]" rows="5" placeholder="{{ entry_open }}" id="input-open" class="form-control">{{ config_open['language_'~language.language_id] }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-comment"><span data-toggle="tooltip" data-container="#tab-general" title="{{ help_comment }}">{{ entry_comment }}</span></label>
+                <div class="col-sm-10">
+                
+                    <textarea name="config_comment" id="input-comment" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ config_comment ? config_comment }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-footer_description">{{ entry_footer_description }}</label>
+                <div class="col-sm-10">
+                    <textarea name="config_footer_description" id="input-footer_description" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ config_footer_description ? config_footer_description }}</textarea>
+                </div>
+            </div>
+
+
+            {% if locations %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span data-toggle="tooltip" data-container="#tab-general" title="{{ help_location }}">{{ entry_location }}</span></label>
+                    <div class="col-sm-10"> {% for location in locations %}
+                        <div class="checkbox">
+                            <label> {% if location.location_id in config_location %}
+                            <input type="checkbox" name="config_location[]" value="{{ location.location_id }}" checked="checked" />
+                            {{ location.name }}
+                            {% else %}
+                            <input type="checkbox" name="config_location[]" value="{{ location.location_id }}" />
+                            {{ location.name }}
+                            {% endif %} 
+                            </label>
+                        </div>
+                    {% endfor %} </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+
+    {% endfor %}
+</div>

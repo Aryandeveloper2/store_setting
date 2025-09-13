@@ -1,0 +1,69 @@
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp_status">{{ entry_whatsapp_status }}</label>
+<div class="col-sm-10">
+<select name="config_whatsapp_status" id="input-whatsapp_status" class="form-control">
+<option value="1" {% if config_whatsapp_status == 1 %} selected="selected" {% endif %}>{{ text_whatsapp_status_on }}</option>                   
+<option value="0" {% if config_whatsapp_status == 0 %} selected="selected" {% endif %}>{{ text_whatsapp_status_off }}</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp-number">{{ entry_whatsapp_number }}</label>
+<div class="col-sm-10">
+<input type="text" name="config_whatsapp_number" value="{{ config_whatsapp_number }}" placeholder="{{ entry_whatsapp_number }}" id="input-whatsapp-number" class="form-control" />
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp-title">{{ entry_whatsapp_title }}</label>
+<div class="col-sm-10">
+<input type="text" name="config_whatsapp_title" value="{{ config_whatsapp_title }}" placeholder="{{ entry_whatsapp_title }}" id="input-whatsapp-title" class="form-control" />
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp-text">{{ entry_whatsapp_text }}</label>
+<div class="col-sm-10">
+<input type="text" name="config_whatsapp_text" value="{{ config_whatsapp_text }}" placeholder="{{ entry_whatsapp_text }}" id="input-whatsapp-text" class="form-control" />
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label">{{ entry_whatsapp_position }}</label>
+<div class="col-sm-10">
+<label class="radio-inline"> {% if config_whatsapp_position == 'left' or config_whatsapp_position is null  %}
+<input type="radio" name="config_whatsapp_position" value="left" checked="checked" />
+{{ text_whatsapp_left }}
+{% else %}
+<input type="radio" name="config_whatsapp_position" value="left" />
+{{ text_whatsapp_left }}
+{% endif %} </label>
+<label class="radio-inline"> {% if config_whatsapp_position == 'right' %}
+<input type="radio" name="config_whatsapp_position" value="right" checked="checked" />
+{{ text_whatsapp_right }}
+{% else %}
+<input type="radio" name="config_whatsapp_position" value="right" />
+{{ text_whatsapp_right }}
+{% endif %} </label>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp_pagesoff">{{ entry_whatsapp_pagesoff }}</label>
+<div class="col-sm-10">
+<select name="config_whatsapp_pagesoff" id="input-whatsapp_pagesoff" class="form-control">
+<option value="1" {% if config_whatsapp_pagesoff == 1 %} selected="selected" {% endif %}>{{ text_whatsapp_pagesoff_on }}</option>                   
+<option value="0" {% if config_whatsapp_pagesoff == 0 %} selected="selected" {% endif %}>{{ text_whatsapp_pagesoff_off }}</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label" for="input-whatsapp_color">رنگ</label>
+<div class="col-sm-6">
+<div class=" input-group colorpicker-component">
+<input type="text" name="config_whatsapp_color" value="{{ config_whatsapp_color ?: '#01e675'}}" placeholder="Selecione uma cor" id="input-whatsapp_color" class="form-control" />
+<span class="input-group-addon"><i></i></span>
+</div>
+</div>
+</div>
+<script>
+$(function() {
+$('.colorpicker-component').colorpicker();
+});
+</script>
