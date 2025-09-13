@@ -362,7 +362,8 @@ $code = $detect ? $detect : '';
 }
 
 if (!array_key_exists($code, $languages)) {
-$code = $this->config->get('config_language');
+$query_language_setting = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` = 'config_language'");
+$code = $query_language_setting->row['value'];
 }
 
 if (!isset($this->session->data['language']) || $this->session->data['language'] != $code) {
