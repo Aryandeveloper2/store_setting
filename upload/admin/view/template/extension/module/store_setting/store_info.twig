@@ -212,39 +212,48 @@
                             <td class="text-right">{{ entry_image }}</td>
                             <td class="text-left required">{{ entry_socialname }}</td>
                             <td class="text-left">{{ entry_social_title }}</td>
+                            <td class="text-left">لینک</td>
                             <td class="text-left">{{ entry_opration }}</td>
                         </tr>
                     </thead>
                     <tbody class="socials_{{language.language_id}}">
                         {% set social_row = 0 %}
-                            {% for social in config_social[language.language_id] %}
-                            <tr id="social-row{{language.language_id}}{{ social_row }}">
-                                <td class="text-left">
-                                    <a href="" id="thumb-image{{language.language_id}}{{ social_row }}" 
-                                    data-toggle="image" class="img-thumbnail">
-                                        <img src="{{ social.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
-                                    </a> 
-                                    <input type="hidden" 
-                                    name="config_social[{{language.language_id}}][{{social_row}}][image]" 
-                                    value="{{ social.image }}" id="input-image{{language.language_id}}{{ social_row }}"/>
-                                </td>
-                                <td class="text-right ">
-                                    <input type="text" name="config_social[{{language.language_id}}][{{social_row}}][name]" 
-                                    value="{{ social.name }}"  class="form-control" />
-                                    {% if error.social_name %}
-                                        <p class="text-danger">{{ error.social_name[social_row] }}</p>
-                                    {% endif %}
-                                </td>
-                                <td class="text-right "><input type="text" name="config_social[{{language.language_id}}][{{social_row}}][title]" value="{{ social.title }}"  class="form-control" /></td>
-                                <td class="text-right"><button type="button" onclick="$('#social-row{{language.language_id}}{{ social_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                            </tr>
+                            {% for social in config_social['language_' ~ language.language_id] %}
+                                <tr id="social-row{{language.language_id}}{{ social_row }}">
+                                    <td class="text-left">
+                                        <a href="" id="thumb-image-social{{language.language_id}}{{ social_row }}" 
+                                            data-toggle="image" class="img-thumbnail">
+                                            <img src="{{ social.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                        </a> 
+                                        <input 
+                                            type="hidden" 
+                                            name="config_social[{{'language_' ~ language.language_id}}][{{social_row}}][image]" 
+                                            value="{{ social.image }}" id="input-image-social{{language.language_id}}{{ social_row }}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <input type="text"
+                                        name="config_social[{{'language_' ~ language.language_id}}][{{social_row}}][name]" 
+                                        value="{{ social.name }}"  class="form-control" />
+                                        {% if error.social_name %}
+                                            <p class="text-danger">{{ error.social_name[social_row] }}</p>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-right">
+                                        <input type="text" name="config_social[{{'language_' ~ language.language_id}}][{{social_row}}][title]" value="{{ social.title }}"  class="form-control" /></td>
+                                    <td class="text-right">
+                                    <input type="text" 
+                                    name="config_social[{{'language_' ~ language.language_id}}][{{social_row}}][link]" 
+                                    value="{{ social.link }}"  class="form-control" />
+                                    </td>
+                                    <td class="text-right"><button type="button" onclick="$('#social-row{{language.language_id}}{{ social_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                                </tr>
                             {% set social_row = social_row + 1 %}
                         {% endfor %}
                     </tbody>   
 
                     <tfoot>
                         <tr>
-                            <td colspan="3"></td>
+                            <td colspan="4"></td>
                             <td class="text-right"><button type="button" onclick="addSocialRow({{language.language_id}});" data-toggle="tooltip" title="{{ button_filter_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                         </tr>
                     </tfoot>
@@ -257,41 +266,52 @@
                     <thead>
                         <tr>
                             <td class="text-right">{{ entry_image }}</td>
-                            <td class="text-left required">{{ entry_applicationname }}</td>
-                            <td class="text-left">{{ entry_application_title }}</td>
+                            <td class="text-left required">{{ entry_socialname }}</td>
+                            <td class="text-left">{{ entry_social_title }}</td>
+                            <td class="text-left">لینک</td>
                             <td class="text-left">{{ entry_opration }}</td>
                         </tr>
                     </thead>
                     <tbody class="applications_{{language.language_id}}">
                         {% set application_row = 0 %}
                             {% for application in config_application['language_' ~ language.language_id] %}
-                            <tr id="application-row{{language.language_id}}{{ application_row }}">
-                                <td class="text-left">
-                                    <a href="" id="thumb-image{{language.language_id}}{{ application_row }}" 
-                                    data-toggle="image" class="img-thumbnail">
-                                        <img src="{{ application.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
-                                    </a> 
-                                    <input type="hidden" 
-                                    name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][image]" 
-                                    value="{{ application.image }}" id="input-image{{language.language_id}}{{ application_row }}"/>
-                                </td>
-                                <td class="text-right ">
-                                    <input type="text" name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][name]" 
-                                    value="{{ application.name }}"  class="form-control" />
-                                    {% if error.application_name['language_' ~ language.language_id] %}
-                                        <p class="text-danger">{{ error.application_name[application_row] }}</p>
-                                    {% endif %}
-                                </td>
-                                <td class="text-right "><input type="text" name="config_application[{{language.language_id}}][{{application_row}}][title]" value="{{ application.title }}"  class="form-control" /></td>
-                                <td class="text-right"><button type="button" onclick="$('#application-row{{language.language_id}}{{ application_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                            </tr>
+                                <tr id="application-row{{language.language_id}}{{ application_row }}">
+                                    <td class="text-left">
+                                        <a href="" id="thumb-image-application{{language.language_id}}{{ application_row }}" 
+                                        data-toggle="image" class="img-thumbnail">
+                                            <img src="{{ application.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                        </a> 
+                                        <input type="hidden" 
+                                        name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][image]" 
+                                        value="{{ application.image }}" id="input-image-application{{language.language_id}}{{ application_row }}"/>
+                                    </td>
+                                    <td class="text-right ">
+                                        <input type="text" name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][name]" 
+                                        value="{{ application.name }}"  class="form-control" />
+                                        {% if error.application_name['language_' ~ language.language_id] %}
+                                            <p class="text-danger">{{ error.application_name[application_row] }}</p>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-right "><input type="text" name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][title]" value="{{ application.title }}"  class="form-control" /></td>
+                                    <td class="text-right ">
+                                        <input type="text" 
+                                        name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][link]" 
+                                        value="{{ application.link }}"  class="form-control" />
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="button" 
+                                            onclick="$('#application-row{{language.language_id}}{{ application_row }}').remove();" 
+                                            data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             {% set application_row = application_row + 1 %}
                         {% endfor %}
                     </tbody>   
 
                     <tfoot>
                         <tr>
-                            <td colspan="3"></td>
+                            <td colspan="4"></td>
                             <td class="text-right"><button type="button" onclick="addApplicationRow({{language.language_id}});" data-toggle="tooltip" title="{{ button_filter_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                         </tr>
                     </tfoot>
@@ -310,23 +330,25 @@
  
     function addSocialRow(lang_id) {
            var social_row = $(`.socials_${lang_id} tr`).length;
-          let  html = `
+           let  html = `
             <tr id="social-row${lang_id}${social_row}">
                     <td class="text-left">
-                        <a href="" id="thumb-image${lang_id}${social_row}" 
+                        <a href="" id="thumb-image-social${lang_id}${social_row}" 
                         data-toggle="image" class="img-thumbnail">
                             <img src="" alt="" title="" data-placeholder="{{ placeholder }}"/>
                         </a> 
                         <input type="hidden" 
-                        name="config_social[${lang_id}][${social_row}][image]" 
-                        id="input-image${lang_id}${social_row}"/>
+                        name="config_social[language_${lang_id}][${social_row}][image]" 
+                        id="input-image-social${lang_id}${social_row}"/>
                     </td>
                     <td class="text-right ">
-                        <input type="text" name="config_social[${lang_id}][${social_row}][name]" 
-                        value="{{ social.name }}"  class="form-control" />
+                        <input type="text" name="config_social[language_${lang_id}][${social_row}][name]" 
+                        value=""  class="form-control" />
                         
                     </td>
-                    <td class="text-right "><input type="text" name="config_social[${lang_id}][${social_row}][title]"  class="form-control" /></td>
+                    <td class="text-right "><input type="text" name="config_social[language_${lang_id}][${social_row}][title]"  class="form-control" /></td>
+                    <td class="text-right "><input type="text" name="config_social[language_${lang_id}][${social_row}][link]"  class="form-control" /></td>
+
                     <td class="text-right"><button type="button" onclick="$('#social-row${lang_id}${social_row}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                 </tr>
            
@@ -340,20 +362,22 @@
           let  html = `
             <tr id="application-row${lang_id}${application_row}">
                     <td class="text-left">
-                        <a href="" id="thumb-image${lang_id}${application_row}" 
+                        <a href="" id="thumb-image-application${lang_id}${application_row}" 
                         data-toggle="image" class="img-thumbnail">
                             <img src="" alt="" title="" data-placeholder="{{ placeholder }}"/>
                         </a> 
                         <input type="hidden" 
-                        name="config_application[${lang_id}][${application_row}][image]" 
-                        id="input-image${lang_id}${application_row}"/>
+                        name="config_application[language_${lang_id}][${application_row}][image]" 
+                        id="input-image-application${lang_id}${application_row}"/>
                     </td>
                     <td class="text-right ">
-                        <input type="text" name="config_application[${lang_id}][${application_row}][name]" 
-                        value="{{ application.name }}"  class="form-control" />
+                        <input type="text" name="config_application[language_${lang_id}][${application_row}][name]" 
+                        value=""  class="form-control" />
                         
                     </td>
-                    <td class="text-right "><input type="text" name="config_application[${lang_id}][${application_row}][title]"  class="form-control" /></td>
+                    <td class="text-right "><input type="text" name="config_application[language_${lang_id}][${application_row}][title]"  class="form-control" /></td>
+                    <td class="text-right "><input type="text" name="config_application[language_${lang_id}][${application_row}][link]"  class="form-control" /></td>
+
                     <td class="text-right"><button type="button" onclick="$('#application-row${lang_id}${application_row}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                 </tr>
            

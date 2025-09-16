@@ -6,9 +6,25 @@
 <author>AshkanMahdizadeh</author>
 <link>https://github.com/TheRealAshkan</link>
 
-
+<file path="admin/controller/setting/store.php">
+<operation>
+<search><![CDATA[public function index() {]]></search>
+<add position="after"><![CDATA[
+$this->response->redirect($this->url->link('extension/module/store_setting', 'user_token=' . $this->session->data['user_token'], true));
+]]></add>
+</operation>
+</file>
 
 <file path="admin/controller/setting/setting.php">
+<operation>
+<search><![CDATA[public function index() {]]></search>
+<add position="after"><![CDATA[
+$this->response->redirect($this->url->link('extension/module/store_setting', 'user_token=' . $this->session->data['user_token'], true));
+]]></add>
+</operation>
+
+
+
 <operation>
 <search><![CDATA[$this->error['meta_title'] = $this->language->get('error_meta_title');]]></search>
 <add position="replace"><![CDATA[
@@ -35,8 +51,6 @@ $this->error['meta_title'][$key] = $this->language->get('error_meta_title');
 <operation>
 <search><![CDATA[ if (!$this->request->post['config_name']) {]]></search>
 <add position="before"><![CDATA[
-
-
 if(isset($this->request->post['config_name'] )) {
 foreach($this->request->post['config_name'] as $key => $value) {
 if (empty($value)) {

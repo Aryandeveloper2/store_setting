@@ -266,9 +266,11 @@ class ControllerExtensionModuleStoreSetting extends Controller {
                     $data['icon']['language_' . $language['language_id']] = $this->model_tool_image->resize('no_image.png', 100, 100);
                 }
 
+			
                 if(isset($data['config_social']['language_' . $language['language_id']]) ) {
                     foreach ($data['config_social']['language_' . $language['language_id']] as $key => $value) {
-                        $data['config_social']['language_' . $language['language_id']][$key]['image_url'] = $this->model_tool_image->resize($value['image'], 100, 100);
+                        $data['config_social']['language_' . $language['language_id']][$key]['image_url'] =
+						 $this->model_tool_image->resize( $value['image'] , 100, 100);
                     }
                 }
 
@@ -417,16 +419,23 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
-        foreach ($this->request->post['config_social'] as $key => $value) {
-            if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-                $this->error['social_name'][$key] = $this->language->get('error_social_name');
-            }
+        foreach ($this->request->post['config_social'] as $language_id => $language) {
+			foreach ($language as $key => $value) {
+			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+                	$this->error['social_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
+            	}
+			}
+           
         }
 
         foreach ($this->request->post['config_application'] as $key => $value) {
-            if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-                $this->error['application_name'][$key] = $this->language->get('error_application_name');
-            }
+			foreach ($language as $key => $value) {
+			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+                	$this->error['application_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
+            	}
+			}
+			
+       
         }
         
 		return !$this->error;
