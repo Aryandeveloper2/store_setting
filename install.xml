@@ -2,10 +2,15 @@
 <modification>
 <name>store_setting</name>
 <code>store_setting</code>
-<version>1.0.0.0</version>
+<version>1.0.0.1</version>
 <author>AshkanMahdizadeh</author>
 <link>https://github.com/TheRealAshkan</link>
-
+<file path="admin/controller/common/column_left.php">
+<operation>
+<search><![CDATA['setting/store']]></search>
+<add position="replace"><![CDATA['extension/module/store_setting']]></add>
+</operation>
+</file>
 <file path="admin/controller/setting/store.php">
 <operation>
 <search><![CDATA[public function index() {]]></search>
@@ -14,7 +19,6 @@ $this->response->redirect($this->url->link('extension/module/store_setting', 'us
 ]]></add>
 </operation>
 </file>
-
 <file path="admin/controller/setting/setting.php">
 <operation>
 <search><![CDATA[public function index() {]]></search>
@@ -22,20 +26,14 @@ $this->response->redirect($this->url->link('extension/module/store_setting', 'us
 $this->response->redirect($this->url->link('extension/module/store_setting', 'user_token=' . $this->session->data['user_token'], true));
 ]]></add>
 </operation>
-
-
-
 <operation>
 <search><![CDATA[$this->error['meta_title'] = $this->language->get('error_meta_title');]]></search>
 <add position="replace"><![CDATA[
-
 ]]></add>
 </operation>
 <operation>
 <search><![CDATA[if (!$this->request->post['config_meta_title']) {]]></search>
 <add position="before"><![CDATA[
-
-
 if(isset($this->request->post['config_meta_title'] )) {
 foreach($this->request->post['config_meta_title'] as $key => $value) {
 if (empty($value)) {
@@ -45,9 +43,6 @@ $this->error['meta_title'][$key] = $this->language->get('error_meta_title');
 }
 ]]></add>
 </operation>
-
-
-
 <operation>
 <search><![CDATA[ if (!$this->request->post['config_name']) {]]></search>
 <add position="before"><![CDATA[
@@ -60,9 +55,6 @@ $this->error['name'][$key] = $this->language->get('error_name');
 }
 ]]></add>
 </operation>
-
-
-
 <operation>
 <search><![CDATA[$this->error['owner'] = $this->language->get('error_owner');]]></search>
 <add position="replace"><![CDATA[]]></add>
@@ -78,7 +70,6 @@ $this->error['owner'][$key] = $this->language->get('error_owner');
 }
 ]]></add>
 </operation>
-
 <operation>
 <search><![CDATA[$this->error['address'] = $this->language->get('error_address');]]></search>
 <add position="replace"><![CDATA[]]></add>
@@ -94,8 +85,6 @@ $this->error['address'][$key] = $this->language->get('error_address');
 }
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$this->error['email'] = $this->language->get('error_email');]]></search>
 <add position="replace"><![CDATA[]]></add>
@@ -111,8 +100,6 @@ $this->error['email'][$key] = $this->language->get('error_email');
 }
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$this->error['telephone'] = $this->language->get('error_telephone');]]></search>
 <add position="replace"><![CDATA[]]></add>
@@ -128,22 +115,16 @@ $this->error['telephone'][$key] = $this->language->get('error_telephone');
 }
 ]]></add>
 </operation>
-
-
-
-
 <operation>
 <search><![CDATA[if (isset($this->request->post['config_image']) && is_file(DIR_IMAGE . $this->request->post['config_image'])) {]]></search>
 <add position="before"><![CDATA[
 /*
 ]]></add>
 </operation>
-
 <operation>
 <search><![CDATA[$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);]]></search>
 <add position="after" offset="1"><![CDATA[
 */
-
 if (isset($this->request->post['config_image'])) {
 foreach($this->request->post['config_image'] as $key => $image) {
 if(is_file(DIR_IMAGE . $image)) {
@@ -151,117 +132,74 @@ $data['thumb'][$key] = $this->model_tool_image->resize($image, 100, 100);
 }
 }
 } elseif ($this->config->get('config_image') ) {
-
 foreach($this->config->get('config_image') as $key => $image) {
 if(is_file(DIR_IMAGE . $image)) {
 $data['thumb'][$key] = $this->model_tool_image->resize($image, 100, 100);
 }
 }
-
 }else {
 $data['thumb'] = [];
 }
-
 ]]></add>
 </operation>
-
-
 </file>
-
-
-
-
-
-
 <file path="admin/controller/startup/startup.php">
-
 <operation>
 <search><![CDATA[$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE code = '" . $this->db->escape($this->config->get('config_admin_language')) . "'");]]></search>
 <add position="before"><![CDATA[
 /*
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$this->registry->set('language', $language);]]></search>
 <add position="after"><![CDATA[
 */
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");]]></search>
 <add position="replace"><![CDATA[
 $query_language_setting = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` = 'config_admin_language'");
 $this->config->set('config_admin_language',$query_language_setting->row['value']);
-
 $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE code = '" . $this->db->escape($this->config->get('config_admin_language')) . "'");
-
 if ($query->num_rows) {
 $this->config->set('config_language_id', $query->row['language_id']);
 }
-
 // Language
 $language = new Language($this->config->get('config_admin_language'));
 $language->load($this->config->get('config_admin_language'));
 $this->registry->set('language', $language);
-
-
-
 $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'  AND language_id IN (0 , '" . (int)$this->config->get('config_language_id') . "') ");
-
-
-
 ]]></add>
 </operation>
-
-
-
-
-
-
-
-
-
 </file>
-
 <file path="admin/model/setting/setting.php">
 <operation>
 <search><![CDATA[return $query->row['value'];]]></search>
 <add position="replace"><![CDATA[
 if( $query->row['language_id'] > 0) {
 $values = [];
-
 foreach ($query->rows as $key => $value) {
 $values[$value['language_id']] = $value['value'];
 }
-
 return $values;
 } else {
 return $query->row['value'];
 }
-
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[SELECT value ]]></search>
 <add position="replace"><![CDATA[
 SELECT value , language_id
 ]]></add>
 </operation>
-
 <operation>
 <search><![CDATA[if (substr($key, 0, strlen($code)) == $code) {]]></search>
 <add position="after"><![CDATA[
-
 $all_match = false;
 if (is_array($value)) {
 $all_match = true;
-
 foreach (array_keys($value) as $d) {
 if (!preg_match('/^language_\d+$/', $d)) {
 $all_match = false;
@@ -269,14 +207,10 @@ break;
 }
 }
 }
-
-
 if($all_match) {
 foreach ($value as $language_id => $item) {
-
 $parts = explode('_', $language_id );
 $language_id  = (int)end($parts);
-
 if (!is_array($item)) {
 $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `language_id` = '" . (int)$language_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($item) . "'");
 } else {
@@ -284,75 +218,50 @@ $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)
 }
 }
 } else {
-
-
-
-
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value, true)) . "', serialized = '1'");]]></search>
 <add position="after"><![CDATA[
 }
 ]]></add>
 </operation>
-
-
 </file>
-
-
 <file path="catalog/controller/startup/startup.php">
-
-
 <operation>
 <search><![CDATA[$this->load->model('localisation/language');]]></search>
 <add position="before"><![CDATA[
 /*
 ]]></add>
 </operation>
-
-
 <operation>
 <search><![CDATA[$this->config->set('config_language_id', $languages[$code]['language_id']);]]></search>
 <add position="after"><![CDATA[
 */
 ]]></add>
 </operation>
-
-
-
 <operation>
 <search><![CDATA[$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE store_id = '0' OR store_id = '" . (int)$this->config->get('config_store_id') . "' ORDER BY store_id ASC");]]></search>
 <add position="replace"><![CDATA[
 // Language
 $code = '';
-
 $this->load->model('localisation/language');
-
 $languages = $this->model_localisation_language->getLanguages();
-
 if (isset($this->session->data['language'])) {
 $code = $this->session->data['language'];
 }
-
 if (isset($this->request->cookie['language']) && !array_key_exists($code, $languages)) {
 $code = $this->request->cookie['language'];
 }
-
 // Language Detection
 if (!empty($this->request->server['HTTP_ACCEPT_LANGUAGE']) && !array_key_exists($code, $languages)) {
 $detect = '';
-
 $browser_languages = explode(',', $this->request->server['HTTP_ACCEPT_LANGUAGE']);
-
 // Try using local to detect the language
 foreach ($browser_languages as $browser_language) {
 foreach ($languages as $key => $value) {
 if ($value['status']) {
 $locale = explode(',', $value['locale']);
-
 if (in_array($browser_language, $locale)) {
 $detect = $key;
 break 2;
@@ -360,59 +269,39 @@ break 2;
 }
 }	
 }			
-
 if (!$detect) { 
 // Try using language folder to detect the language
 foreach ($browser_languages as $browser_language) {
 if (array_key_exists(strtolower($browser_language), $languages)) {
 $detect = strtolower($browser_language);
-
 break;
 }
 }
 }
-
 $code = $detect ? $detect : '';
 }
-
 if (!array_key_exists($code, $languages)) {
 $query_language_setting = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` = 'config_language'");
 $code = $query_language_setting->row['value'];
 }
-
 if (!isset($this->session->data['language']) || $this->session->data['language'] != $code) {
-
 if(!is_array($this->session->data)) $this->session->data = [];
 $this->session->data['language'] = $code;
-
 }
-
 if (!isset($this->request->cookie['language']) || $this->request->cookie['language'] != $code) {
 setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
 }
-
 // Overwrite the default language object
 $language = new Language($code);
 $language->load($code);
-
 $this->registry->set('language', $language);
-
 // Set the config language_id
 $this->config->set('config_language_id', $languages[$code]['language_id']);	
-
 // Settings
 $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` 
 WHERE store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id IN (0 , '" . (int)$this->config->get('config_language_id') . "')
 ORDER BY store_id ASC");
-
-
-
 ]]></add>
 </operation>
-
-
-
-
-
 </file>
 </modification>

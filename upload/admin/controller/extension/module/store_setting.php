@@ -36,7 +36,7 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 		}
 		
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-			$module_info = $this->getSetting('config');
+			$module_info = $this->getSetting('config',0);
 		    $data = $module_info;
 		} else if($this->request->server['REQUEST_METHOD'] == 'POST') {
 		    $module_info = $this->request->post;
@@ -56,13 +56,12 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 			$data['error_warning'] = '';
 		}
 
-        
 		if (isset($this->error)) {
 			$data['error'] = $this->error;
 		} else {
 			$data['error'] = [];
 		}
-        // var_dump($data['error']);
+        
 
 		$data['breadcrumbs'] = array();
 
@@ -84,8 +83,7 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 
         $data['action'] = $this->url->link('extension/module/store_setting', 'user_token=' . $this->session->data['user_token'], true);
 	
-		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true);
-	
+
 		$this->load->model('localisation/language');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
@@ -343,7 +341,7 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 		}
 
 		
-        if(isset($this->request->post['config_owner'] )) {
+        if(isset($this->request->post['config_owner'])) {
             foreach($this->request->post['config_owner'] as $key => $value) {
                 if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 64)) {
                     $this->error['owner'][$key] = $this->language->get('error_owner');
@@ -351,15 +349,15 @@ class ControllerExtensionModuleStoreSetting extends Controller {
             }
 		}
 		
-        if(isset($this->request->post['config_address'] )) {
+        if(isset($this->request->post['config_address'])) {
             foreach($this->request->post['config_address'] as $key => $value) {
-                if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 64)) {
+                if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 512)) {
                     $this->error['address'][$key] = $this->language->get('error_address');
                 }
             }
 		}
 
-        if(isset($this->request->post['config_email'] )) {
+        if(isset($this->request->post['config_email'])) {
             foreach($this->request->post['config_email'] as $key => $value) {
                 if ((utf8_strlen($value) > 96) || !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     $this->error['email'][$key] = $this->language->get('error_email');
@@ -418,24 +416,26 @@ class ControllerExtensionModuleStoreSetting extends Controller {
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
-
-        foreach ($this->request->post['config_social'] as $language_id => $language) {
-			foreach ($language as $key => $value) {
-			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-                	$this->error['social_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
-            	}
-			}
-           
+        
+        if(isset($this->request->post['config_social'])) {
+            foreach ($this->request->post['config_social'] as $language_id => $language) {
+    			foreach ($language as $key => $value) {
+    			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+                    	$this->error['social_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
+                	}
+    			}
+               
+            }
         }
-
-        foreach ($this->request->post['config_application'] as $key => $value) {
-			foreach ($language as $key => $value) {
-			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-                	$this->error['application_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
-            	}
-			}
-			
-       
+        
+        if(isset($this->request->post['config_application'])) {
+            foreach ($this->request->post['config_application'] as $key => $value) {
+    			foreach ($language as $key => $value) {
+    			 	if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+                    	$this->error['application_name']['language_' . $language_id][$key] = $this->language->get('error_social_name');
+                	}
+    			}
+            }
         }
         
 		return !$this->error;
