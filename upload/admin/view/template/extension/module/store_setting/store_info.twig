@@ -71,6 +71,9 @@
                         value="{{ config_alternate_site_name['language_'~language.language_id] }}" placeholder="{{ entry_alternate_site_name }}" id="input-alternate_site_name" class="form-control" />
                     </div>
                 </div>
+                
+                
+                 
 
             </fieldset>
 
@@ -199,6 +202,14 @@
                         <textarea name="config_footer_description[{{'language_'~language.language_id}}]" id="input-footer_description" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ config_footer_description['language_'~language.language_id] ? config_footer_description['language_'~language.language_id] }}</textarea>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-copyright">کپی رایت فوتر</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="config_copyright[{{'language_'~language.language_id}}]" 
+                        value="{{ config_copyright['language_'~language.language_id] }}" placeholder="{{ entry_copyright }}" id="input-copyright" class="form-control" />
+                    </div>
+                </div>
 
             </fieldset>
 
@@ -222,8 +233,14 @@
                                 <tr id="social-row{{language.language_id}}{{ social_row }}">
                                     <td class="text-left">
                                         <a href="" id="thumb-image-social{{language.language_id}}{{ social_row }}" 
-                                            data-toggle="image" class="img-thumbnail">
+                                            data-toggle="image" data-icon="1" class="img-thumbnail">
                                             <img src="{{ social.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                            
+                                            <div class="thumb_icon">
+                                                {% if social.icon %}
+                                                  {{ load_icon_admin(social.icon)}}
+                                                {% endif %}
+                                            </div>
                                         </a> 
                                         <input 
                                             type="hidden" 
@@ -280,6 +297,11 @@
                                         <a href="" id="thumb-image-application{{language.language_id}}{{ application_row }}" 
                                         data-toggle="image" class="img-thumbnail">
                                             <img src="{{ application.image_url }}" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                                             <div class="thumb_icon">
+                                                {% if application.icon %}
+                                                  {{ load_icon_admin(application.icon)}}
+                                                {% endif %}
+                                            </div>
                                         </a> 
                                         <input type="hidden" 
                                         name="config_application[{{'language_' ~ language.language_id}}][{{application_row}}][image]" 
@@ -334,12 +356,19 @@
             <tr id="social-row${lang_id}${social_row}">
                     <td class="text-left">
                         <a href="" id="thumb-image-social${lang_id}${social_row}" 
-                        data-toggle="image" class="img-thumbnail">
+                            data-toggle="image" data-icon="1" class="img-thumbnail">
                             <img src="" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                            
+                            <div class="thumb_icon">
+                               
+                            </div>
                         </a> 
+                        
                         <input type="hidden" 
                         name="config_social[language_${lang_id}][${social_row}][image]" 
                         id="input-image-social${lang_id}${social_row}"/>
+                        
+                        
                     </td>
                     <td class="text-right ">
                         <input type="text" name="config_social[language_${lang_id}][${social_row}][name]" 
@@ -363,9 +392,15 @@
             <tr id="application-row${lang_id}${application_row}">
                     <td class="text-left">
                         <a href="" id="thumb-image-application${lang_id}${application_row}" 
-                        data-toggle="image" class="img-thumbnail">
+                        data-toggle="image" data-icon="1"  class="img-thumbnail">
                             <img src="" alt="" title="" data-placeholder="{{ placeholder }}"/>
+                            
+                            <div class="thumb_icon">
+                               
+                            </div>
                         </a> 
+                         
+  
                         <input type="hidden" 
                         name="config_application[language_${lang_id}][${application_row}][image]" 
                         id="input-image-application${lang_id}${application_row}"/>
